@@ -1,0 +1,6 @@
+.pylintrc
+project-plan.txt
+database/
+.vscode/
+__pycache__/
+venv/

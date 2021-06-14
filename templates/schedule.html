@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recurring Transactions
+{% endblock %}
+
+{% block main %}
+    <form action="/schedule" method="post">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Scheduled Income</h2>
+                <table class="table table-sm table-striped table-borderless table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Source</th>
+                            <th scope="col">Frequency</th>
+                            <th scope="col">Next</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in credits %}
+                        <tr>
+                            <td>{{ transaction["amount"] }}</td>
+                            <td>{{ transaction["source"] }}</td>
+                            <td>{{ transaction["frequency"] }}</td>
+                            <td>{{ transaction["next"] }}</td>
+                            <td>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-danger">
+                                        <input type="checkbox" name="delete" value="{{ transaction['id'] }}" autocomplete="off"> <div>&nbsp;</div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-6">
+                <h2>Scheduled Payments</h2>
+                <table class="table table-sm table-striped table-borderless table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency</th>
+                            <th scope="col">Next</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transaction in debits %}
+                        <tr>
+                            <td>{{ transaction["amount"] }}</td>
+                            <td>{{ transaction["destination"] }}</td>
+                            <td>{{ transaction["frequency"] }}</td>
+                            <td>{{ transaction["next"] }}</td>
+                            <td>
+                                <div class="btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-danger">
+                                        <input type="checkbox" name="delete" value="{{ transaction['id'] }}" autocomplete="off"> <div>&nbsp;</div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto mt-4">
+                <a type="button" class="btn btn-primary" href="/new-scheduled">Schedule Transaction</a>
+            </div>
+            <div class="col-auto mt-4">
+                <button class="btn btn-primary" type="submit">Delete Selected</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Available Funds
+{% endblock %}
+
+{% block main %}
+    <div class="row justify-content-center">
+        <div class="col-auto border-dark py-3">
+            <h2 class="mb-5">Welcome!</h2>
+            <h3 class="mb-4">Please enter starting funds</h3>
+            <form action="/starting-funds" method="post">
+                <div class="form-group mb-4">
+                    <input autocomplete="on" autofocus class="form-control required" name="seed" min="0.00" step="0.01" placeholder="Amount" type="number">
+                </div>
+                <div>
+                    <button id="dependent-submit" class="btn btn-primary" type="submit" disabled>Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

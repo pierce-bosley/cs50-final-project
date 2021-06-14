@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Available Funds
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="col mb-2">
+            <h2>Available Spending Money:</h1>
+            <h1>{{ proj_spending }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col my-3">
+            <h4>Projected Savings:</h1>
+            <h3>{{ proj_savings }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-3">
+            <h4>Current Savings:</h1>
+            <h3>{{ cur_savings }}</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto border-bottom border-top border-dark py-3">
+            <h3 class="mb-3">Add one-time transaction</h3>
+            <form action="/new-instant" method="post">
+                <div class="form-group">
+                    <input autocomplete="on" autofocus class="form-control required" name="trans-value" min="0.00" step="0.01" placeholder="Amount" type="number">
+                </div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary mb-3 active">
+                        <input type="radio" name="trans-type" value="debit" checked> <div id="debit">Debit</div>
+                    </label>
+                    <label class="btn btn-secondary mb-3">
+                        <input type="radio" name="trans-type" value="credit"> <div id="credit">Credit</div>
+                    </label>
+                </div>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary mb-3 active">
+                        <input type="radio" name="destination" id="new-spending"  value="spending" checked> Spending
+                    </label>
+                    <label class="btn btn-secondary mb-3">
+                        <input type="radio" name="destination" id="new-savings"  value="savings"> Savings
+                    </label>
+                </div>
+                <div>
+                    <button id="dependent-submit" class="btn btn-primary" type="submit" disabled>Add Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col">
+            <a type="button" class="btn btn-primary" href="/new-scheduled">Schedule Future Transaction</a>
+        </div>
+    </div>
+{% endblock %}
